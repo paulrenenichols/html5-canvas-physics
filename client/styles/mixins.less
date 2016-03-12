@@ -1,0 +1,40 @@
+// Clearfix styles, use as mixin, do not apply as class
+.clearfix {
+  &::before, &::after {
+      content: "";
+      display: table;
+  }
+  &::after {
+      clear: both;
+  }
+}
+
+.arrow-right(@size, @borderColor, @backgroundColor) {
+  position: relative;
+
+  &::before {
+    z-index: 2;
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -(@size + 1);
+    width: 0;
+    height: 0;
+    border-top:     @size+1 solid transparent;
+    border-bottom:  @size+1 solid transparent;
+    border-left:    @size+1 solid @backgroundColor;
+  }
+
+  &::after {
+    z-index: 1;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -(@size + 2);
+    width: 0;
+    height: 0;
+    border-top: @size solid transparent;
+    border-bottom: @size solid transparent;
+    border-left: @size solid @borderColor;
+  }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0 />
+    <title>Webpack Redux React Seed</title>
+  </head>
+
+  <body>
+    <div id="redux-app"></div>
+    <script>
+      // For detecting uncaught errors.  Word to your motherboard.
+      //
+      window.onerror = function (errorMsg, url, lineNumber, columnNumber, errorObj) {
+        var reduxApp = document.getElementById('redux-app');
+        // reduxApp.innerHTML = '<div><span>msg: </span><span>' + errorMsg + '</span></div>'
+        //                         + '<div><span>url: </span><span>' + url + '</span></div>'
+        //                         + '<div><span>lineNumber: </span><span>' + lineNumber + '</span></div>'
+        //                         + '<div><span>columnNumber: </span><span>' + columnNumber + '</span></div>'
+        //                         + '<div><span>errorObj: </span><span>' + JSON.stringify(errorObj, null, 2) + '</span></div>';
+        console.log('window.onerror ', errorMsg, url, lineNumber, columnNumber, errorObj);
+      }
+    </script>
+    <script src="bundle.js"></script>
+  </body>
+
+</html>
