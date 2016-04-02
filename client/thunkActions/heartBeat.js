@@ -1,14 +1,15 @@
 import co                                           from 'co';
 
-import { boot,
-         disconnectApplication }                    from './lifeCycle';
-
 // API
 import API                                          from '../api/index';
-const  { fetchApplicationServerPing }                       = API.Http.Server;
+const  { fetchApplicationServerPing }               = API.Http.Server;
 const  { delayedFulfillmentPromise }                = API.Util.Promises;
+const  UIStates                                     = API.Const.UserInterface;
 
-var   heartBeatCount = 0;
+import Actions                                      from '../actions/index';
+const  { uiSetNetworkState }                        = Actions.UserInterface.Creators;
+
+var   heartBeatCount = 5;
 const HEART_BEAT_MAX = 5;
 const HEART_BEAT_MIN = 0;
 
@@ -38,41 +39,46 @@ function testConnectionAndWait(delay) {
     );
 }
 
-export function testConnectionAndStartHeartBeat() {
+export function testConnectionAndStartHeartBeat(onDisconnect, onAttemptReconnect, onConnect) {
   return function testConnectionAndStartHeartBeatClosure(dispatch, reduxState, logger) {
     logger.info({
       message: 'testConnectionAndStartHeartBeat()'
     });
 
+    if (typeof onDisconnect !== 'function') {
+      onDisconnect = () => {};
+    }
+    if (typeof onConnect !== 'function') {
+      onConnect = () => {};
+    }
+    if (typeof onAttemptReconnect !== 'function') {
+      onAttemptReconnect = () => {};
+    }
+
     co(function *heartBeat() {
-      var applicationState;
       while (true) {
-        applicationState = reduxState.UserInterface.getAppState();
-        logger.info({
-          message: 'testConnectionAndStartHeartBeat()',
-          heartBeatCount,
-          applicationState
-        });
 
         if (heartBeatCount === HEART_BEAT_MIN) {
-          yield testConnectionAndWait(100);
-          if (!reduxState.UserInterface.AppState.inAppStateInit() &&  !reduxState.UserInterface.AppState.inAppStateServerDisconnected()) {
-            dispatch(disconnectApplication());
+          if (reduxState.UserInterface.NetworkState.networkIsConnected()) {
+            dispatch(uiSetNetworkState(UIStates.UI_NETWORK_STATE_DISCONNECTED));
           }
+          onDisconnect();
+          yield testConnectionAndWait(30 * 1000);
         }
         else if (heartBeatCount < HEART_BEAT_MAX) {
-          yield testConnectionAndWait(100);
+          if (reduxState.UserInterface.NetworkState.networkIsDisconnected()) {
+            onAttemptReconnect();
+          }
+          yield testConnectionAndWait(1000);
         }
         else if (heartBeatCount === HEART_BEAT_MAX) {
-          if (reduxState.UserInterface.AppState.inAppStateInit() || reduxState.UserInterface.AppState.inAppStateServerDisconnected()) {
-            dispatch(boot());
-            yield testConnectionAndWait(1000);
+          if (reduxState.UserInterface.NetworkState.networkIsDisconnected()) {
+            dispatch(uiSetNetworkState(UIStates.UI_NETWORK_STATE_CONNECTED));
+            onConnect();
+            yield testConnectionAndWait(30 * 1000);
           }
-          else if (reduxState.UserInterface.AppState.inAppStateServerConnected()) {
-            yield testConnectionAndWait(3000);
-          }
-          else {
-            yield testConnectionAndWait(5 * 1000);
+          else if (reduxState.UserInterface.NetworkState.networkIsConnected()) {
+            yield testConnectionAndWait(60 * 1000);
           }
         }
       }

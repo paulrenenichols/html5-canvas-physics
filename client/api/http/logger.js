@@ -9,7 +9,6 @@ export function postLog(logObject) {
     body: JSON.stringify(logObject)
   })
   .catch(function () {
-    console.log('postLog failed, ', logObject);
     return true;
   });
 }
