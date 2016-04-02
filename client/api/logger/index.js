@@ -47,3 +47,9 @@ export function buildLogger(reduxState, logToConsolePredicate) {
 
   return logger;
 }
+
+const Logger = {
+  buildLogger
+}
+
+export default Logger;

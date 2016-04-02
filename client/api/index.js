@@ -1,8 +1,8 @@
-import * as Const       from './const/index';
-import * as Http        from './http/index';
-import * as Logger      from './logger/index';
-import * as ReduxState  from './reduxState/index';
-import * as Util        from './util/index';
+import Const       from './const/index';
+import Http        from './http/index';
+import Logger      from './logger/index';
+import ReduxState  from './reduxState/index';
+import Util        from './util/index';
 
 const API = {
   Const,

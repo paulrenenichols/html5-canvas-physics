@@ -7,7 +7,7 @@ var webpack = require('webpack');
 require('es6-promise').polyfill();
 
 module.exports = {
-    devtool: 'source-map',
+    devtool: 'cheap-module-eval-source-map',
     entry: [
         'webpack-hot-middleware/client',
         './client/index.js'
@@ -23,6 +23,10 @@ module.exports = {
             loaders: ['babel'],
             include: path.join(__dirname, 'client'),
             exclude: /node_modules/
+        },
+        {
+          test: /\.json$/,
+          loader: 'json'
         },
         {
           test: /\.less$/,
