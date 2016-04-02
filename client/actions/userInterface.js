@@ -35,3 +35,11 @@ export function uiSetAppState(appState) {
     appState
   }
 }
+
+export const UI_SET_NETWORK_STATE = 'UI_SET_NETWORK_STATE';
+export function uiSetNetworkState(networkState) {
+  return {
+    type: UI_SET_NETWORK_STATE,
+    networkState
+  }
+}

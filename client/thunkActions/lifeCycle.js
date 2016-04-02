@@ -1,4 +1,5 @@
-import { loadConfig }                    from './config';
+import { loadConfig }                               from './config';
+import { testConnectionAndStartHeartBeat }          from './heartBeat';
 import { testForActiveSession,
          logout,
          shutdownAuthInterval }                     from './auth';
@@ -19,7 +20,7 @@ export function boot() {
       message: 'boot()',
     });
     dispatch([
-      uiSetAppState(UIStates.UI_APP_STATE_SERVER_CONNECTED),
+      testConnectionAndStartHeartBeat(),
       loadConfig(),
       testForActiveSession(),
       startApplication()

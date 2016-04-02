@@ -1,5 +1,6 @@
-import fetch        from 'isomorphic-fetch';
-import { Promises }  from '../util/index';
+import fetch                        from 'isomorphic-fetch';
+import Util                         from '../util/index';
+const  { delayedRejectionPromise }  = Util.Promises;
 
 export function fetchApplicationServerPing() {
   var pingFetch = fetch('/ping', {
@@ -20,7 +21,7 @@ export function fetchApplicationServerPing() {
       }
     );
 
-  return Promise.race([pingFetch, Promises.delayedRejectionPromise(3000)]);
+  return Promise.race([pingFetch, delayedRejectionPromise(3000)]);
 }
 
 export function testFetchApplicationServerPing() {

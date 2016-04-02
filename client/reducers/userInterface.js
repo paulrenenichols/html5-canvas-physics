@@ -6,6 +6,7 @@ const  UIStates     = API.Const.UserInterface;
 
 const initialState = fromJS({
   appState: UIStates.UI_APP_STATE_INIT,
+  networkState: UIStates.UI_NETWORK_STATE_CONNECTED
 });
 
 export default function userInterface(state = initialState, action = {}) {
@@ -22,6 +23,9 @@ export default function userInterface(state = initialState, action = {}) {
 
     case Types.UI_SET_APP_STATE:
       return state.set('appState', action.appState);
+
+    case Types.UI_SET_NETWORK_STATE:
+      return state.set('networkState', action.networkState);
 
     default:
       return state;
