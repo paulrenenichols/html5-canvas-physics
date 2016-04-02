@@ -3,6 +3,9 @@ import React, { Component }                         from 'react';
 import { connect }                                  from 'react-redux';
 import Immutable                                    from 'immutable';
 
+import Footer                                       from '../components/Footer';
+import Header                                       from '../components/Header';
+
 
 function mapStateToProps(state) {
   return {
@@ -26,8 +29,13 @@ class App extends Component {
     let appState = this.props.userInterface.get('appState');
     return (
       <div>
-        <h1>Hello</h1>
-        <p>{appState}</p>
+        <Header {...this.props} />
+        <section className={'main'}>
+          <h1>Hello</h1>
+          <p>{appState}</p>
+          {this.props.children}
+        </section>
+        <Footer {...this.props}/>
       </div>
     );
   }
