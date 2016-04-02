@@ -5,7 +5,7 @@ const  { buildLogger }      = API.Logger;
 export default function reduxActionLoggingMiddleware({ dispatch, getState }) {
   const reduxState = buildReduxState(getState);
   function logToConsolePredicate() {
-    return reduxState.UserInterface.AppState.inAppStateServerDisconnected();
+    return reduxState.UserInterface.NetworkState.networkIsDisconnected();
   }
   let logger = buildLogger(reduxState, logToConsolePredicate);
   return function reduxActionLoggingMiddlewareNextClosure(next) {
