@@ -79,3 +79,9 @@ export function buildReduxState(getState) {
 
   return ReduxState;
 }
+
+const ReduxState = {
+  buildReduxState
+};
+
+export default ReduxState;

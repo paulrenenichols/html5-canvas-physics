@@ -3,10 +3,10 @@ import { rootReducer }                            from '../reducers/index';
 import reduxStateAndLogThunkMiddleware            from '../middleware/reduxStateAndLogThunkMiddleware';
 import sequenceAction                             from 'redux-sequence-action';
 
-const finalCreateStore = compose(
+const enhancer = compose(
   applyMiddleware(sequenceAction, reduxStateAndLogThunkMiddleware)
-)(createStore);
+);
 
 export default function configureStore(initialState) {
-  return finalCreateStore(rootReducer, initialState);
+  return createStore(rootReducer, initialState, enhancer);
 };

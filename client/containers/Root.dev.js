@@ -5,18 +5,17 @@ import App                              from './App';
 // Debugging imports for development test in browser console
 import Immutable                        from 'immutable';
 import _                                from 'lodash';
-import moment                           from 'moment';
+import moment                           from 'moment-timezone';
 import API                              from '../api/index';
 import Perf                             from 'react-addons-perf';
-const  { buildReduxState }                = API.ReduxState;
+const  { buildReduxState }              = API.ReduxState;
 window.Immutable                        = Immutable;
 window.API                              = API;
 window._                                = _;
 window.moment                           = moment;
 window.Perf                             = Perf;
 
-// These are just for debugging, and they are unused in production.
-import { DevTools, DebugPanel, LogMonitor }       from 'redux-devtools/lib/react';
+import DevTools                         from './DevTools';
 
 export default class Root extends Component {
   constructor(props) {
@@ -34,9 +33,7 @@ export default class Root extends Component {
       <Provider store={store}>
         <div style={ {width: '100%', height: '100%'} }>
           <App />
-          <DebugPanel top left bottom>
-            <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
-          </DebugPanel>
+          <DevTools />
         </div>
       </Provider>
     );
