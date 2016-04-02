@@ -54,17 +54,14 @@ export function buildReduxState(getState) {
     },
     getAppState() {
       return this.getWhole().get('appState');
-    }
+    },
+    getNetworkState() {
+      return this.getWhole().get('networkState');
+    },
   };
   ReduxState.UserInterface.AppState = {
     inAppStateInit() {
       return ReduxState.UserInterface.getAppState() === UserInterface.UI_APP_STATE_INIT;
-    },
-    inAppStateServerConnected() {
-      return ReduxState.UserInterface.getAppState() === UserInterface.UI_APP_STATE_SERVER_CONNECTED;
-    },
-    inAppStateServerDisconnected() {
-      return ReduxState.UserInterface.getAppState() === UserInterface.UI_APP_STATE_SERVER_DISCONNECTED;
     },
     inAppStateLoggedIn() {
       return ReduxState.UserInterface.getAppState() === UserInterface.UI_APP_STATE_LOGGED_IN;
@@ -74,6 +71,14 @@ export function buildReduxState(getState) {
     },
     inAppStateActiveSession() {
       return ReduxState.UserInterface.getAppState() === UserInterface.UI_APP_STATE_ACTIVE_SESSION;
+    }
+  };
+  ReduxState.UserInterface.NetworkState = {
+    networkIsConnected() {
+      return ReduxState.UserInterface.getNetworkState() === UserInterface.UI_NETWORK_STATE_CONNECTED;
+    },
+    networkIsDisconnected() {
+      return ReduxState.UserInterface.getNetworkState() === UserInterface.UI_NETWORK_STATE_DISCONNECTED;
     }
   };
 
