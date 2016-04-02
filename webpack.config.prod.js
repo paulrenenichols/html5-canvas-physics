@@ -1,11 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 
-// node 0.10.xx does not support es6 promises.
-// This is a problem because the webpack style loaders need them.
-// This polyfill makes the webpack style loaders work in 0.10.xx versions of node.
-require('es6-promise').polyfill();
-
 module.exports = {
     entry: [
         './client/index.js'

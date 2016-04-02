@@ -1,6 +1,8 @@
 import React, { Component }             from 'react';
 import { Provider }                     from 'react-redux';
 import App                              from './App';
+import routes                           from '../routes';
+import { Router}                        from 'react-router';
 
 // Debugging imports for development test in browser console
 import Immutable                        from 'immutable';
@@ -32,7 +34,7 @@ export default class Root extends Component {
     return (
       <Provider store={store}>
         <div style={ {width: '100%', height: '100%'} }>
-          <App />
+          <Router onUpdate={() => window.scrollTo(0, 0)} history={store.browserHistory} routes={routes} />
           <DevTools />
         </div>
       </Provider>
