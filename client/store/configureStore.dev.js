@@ -4,15 +4,15 @@ import reduxStateAndLogThunkMiddleware            from '../middleware/reduxState
 import reduxActionLoggingMiddleware               from '../middleware/reduxActionLoggingMiddleware';
 import sequenceAction                             from 'redux-sequence-action';
 
-// These are just for debugging, and they are unused in production.
-import { devTools, persistState }                 from 'redux-devtools';
+import DevTools                                   from '../containers/DevTools';
 
-const finalCreateStore = compose(
+const enhancer = compose(
+  // Middleware you want to use in development:
   applyMiddleware(sequenceAction, reduxStateAndLogThunkMiddleware, reduxActionLoggingMiddleware),
-  devTools(),
-  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
-)(createStore);
+  // Required! Enable Redux DevTools with the monitors you chose
+  DevTools.instrument()
+);
 
 export default function configureStore(initialState) {
-  return finalCreateStore(rootReducer, initialState);
+  return createStore(rootReducer, initialState, enhancer);
 };

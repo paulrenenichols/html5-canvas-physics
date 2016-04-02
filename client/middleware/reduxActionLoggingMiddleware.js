@@ -1,4 +1,4 @@
-import * as API             from '../api/index';
+import API                  from '../api/index';
 const  { buildReduxState }  = API.ReduxState;
 const  { buildLogger }      = API.Logger;
 
