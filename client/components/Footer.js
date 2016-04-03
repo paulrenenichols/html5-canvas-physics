@@ -14,11 +14,7 @@ class Footer extends Component {
   render() {
     return (
       <footer>
-        <nav>
-          <ul>
-            <li><a title='About'           href='#'><span>About Us</span></a></li>
-          </ul>
-        </nav>
+        <div>&#9426; 2016</div>
       </footer>
     );
   }
