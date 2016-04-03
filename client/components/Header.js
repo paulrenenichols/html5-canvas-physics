@@ -18,7 +18,7 @@ class Header extends Component {
         <nav>
           <ul>
             <li>
-              <a href='#' title='Demos'>Demos</a>
+              <Link to={'/'} title='Demos'>Demos</Link>
             </li>
           </ul>
         </nav>

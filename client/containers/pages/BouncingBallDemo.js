@@ -1,12 +1,12 @@
 import React, { Component, PropTypes }  from 'react';
 import { connect }                      from 'react-redux';
-import { Link }                         from 'react-router';
+import BouncingBall                     from '../../components/demos/BouncingBall';
 
 function mapStateToProps(state) {
   return {};
 }
 
-class Index extends Component {
+class BouncingBallDemo extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired
@@ -18,14 +18,12 @@ class Index extends Component {
 
   render() {
     return (
-      <div className={'content demo-list'}>
-        <h2>Demos</h2>
-        <ul>
-          <li><Link to={'bouncing-ball'}>Bouncing Ball Demo</Link></li>
-        </ul>
+      <div className={'content'}>
+        <h2>Bouncing Ball Demo</h2>
+        <BouncingBall />
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps)(Index);
+export default connect(mapStateToProps)(BouncingBallDemo);
