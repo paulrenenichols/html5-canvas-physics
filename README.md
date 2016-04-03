@@ -14,6 +14,9 @@ There are more build scripts defined in the package.json scripts section, if you
 in building your bundle for production.
 
 ## Releases
+* [0.4.1](https://github.com/paulrenenichols/html5-canvas-physics/releases/tag/0.4.1)
+Bouncing Ball Demo canvas is now somewhat responsive to window resize.
+
 * [0.4.0](https://github.com/paulrenenichols/html5-canvas-physics/releases/tag/0.4.0)
 Adding Bouncing Ball demo to project.
 
