@@ -3,24 +3,37 @@ import ReactDOM                         from 'react-dom';
 
 class BouncingBall extends Component {
 
-  static propTypes = {}
-
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    radius: PropTypes.number,
+    g:      PropTypes.number,
+    color:  PropTypes.string,
+    x:      PropTypes.number,
+    y:      PropTypes.number,
+    vx:     PropTypes.number,
+    vy:     PropTypes.number
   }
 
   static defaultProps = {
     radius:   20,
     color:    '#0000ff',
-    g:        0.1 // acceleration due to gravity
+    g:        0.1,  // acceleration due to gravity,
+    x:        50,   // initial horizontal position
+    y:        50,   // initial vertical position
+    vx:       2,    // initial horizontal speed
+    vy:       0     // initial vertical speed,
   }
 
   state = {
-    canvas:   null,
-    x:        50,  // initial horizontal position
-    y:        50,  // initial vertical position
-    vx:       2,  // initial horizontal speed
-    vy:       0  // initial vertical speed
+    intervalId: null,
+    canvas:     null,
+    x:          this.props.x,
+    y:          this.props.y,
+    vx:         this.props.vx,
+    vy:         this.props.vy
+  }
+
+  constructor(props) {
+    super(props);
   }
 
   onEachStep() {
@@ -63,7 +76,12 @@ class BouncingBall extends Component {
     this.setState({
       canvas: ReactDOM.findDOMNode(this.refs.canvas)
     });
-    setInterval(() => {this.onEachStep()}, 1000/60); // 60 fps
+    let intervalId = setInterval(() => {this.onEachStep()}, 1000/60); // 60 fps
+    this.setState({ intervalId });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
   }
 
   render() {
