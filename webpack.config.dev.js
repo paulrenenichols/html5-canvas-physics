@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
@@ -25,7 +26,7 @@ module.exports = {
         },
         {
           test: /\.less$/,
-          loader: 'style!css!less'
+          loader: 'style!css!less!postcss-loader'
         },
         {
           test: /\.(png)$/,
@@ -36,6 +37,7 @@ module.exports = {
           loader: 'file?name=images/[name].[ext]'
         }]
     },
+    postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),

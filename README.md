@@ -15,3 +15,7 @@ Future releases will include physics demos.
 
 * [0.2.0](https://github.com/paulrenenichols/html5-canvas-physics/releases/tag/0.2.0)
 Same as 0.1.0, but now with react-router and route definitions.
+
+* [0.3.0](https://github.com/paulrenenichols/html5-canvas-physics/releases/tag/0.3.0)
+Basic flexbox layout.
+Also added autoprefixer to the webpack build.

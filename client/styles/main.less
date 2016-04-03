@@ -1,3 +1,97 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300);
 
 @import './mixins.less';
+
+html,
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #eee;
+  background-color: #ddd;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
+}
+
+// CSS Resets
+ul, dl, ol {
+  margin: 0;
+  padding: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+  font-size: 16px;
+  font-weight: 300;
+  color: inherit;
+  background-color: inherit;
+  margin: 10px 0;
+}
+button {
+  padding: 0;
+  margin: 0;
+}
+a {
+  color: #eee;
+  text-decoration: none;
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+#redux-app {
+  max-width: 1200px;
+  margin: auto;
+
+  /*
+   * This is to get the main section to stretch
+   * react is creating 2 extra divs inside the
+   * #redux-app element
+   */
+  > div {
+    > div:first-child {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .main {
+    flex: 1 0 auto;
+    border-right: 2px solid #444;
+    border-left:  2px solid #444;
+  }
+}
+
+nav {
+  ul {
+    list-style: none;
+  }
+}
+
+header, footer {
+  background-color: #444;
+  nav {
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    li {
+      a {
+        display: block;
+        text-align: center;
+        padding: 0.6em 1em;
+        font-size: 1.5em;
+      }
+    }
+  }
+}
+
+footer {
+  padding: 0.5em 0;
+  div {
+    margin-left: 1.5em;
+  }
+}

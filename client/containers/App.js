@@ -26,13 +26,10 @@ class App extends Component {
   }
 
   render() {
-    let appState = this.props.userInterface.get('appState');
     return (
       <div>
         <Header {...this.props} />
         <section className={'main'}>
-          <h1>Hello</h1>
-          <p>{appState}</p>
           {this.props.children}
         </section>
         <Footer {...this.props}/>
