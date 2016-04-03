@@ -22,10 +22,16 @@ ul, dl, ol {
 }
 h1, h2, h3, h4, h5, h6, p {
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 600;
   color: inherit;
   background-color: inherit;
   margin: 10px 0;
+}
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.5em;
 }
 button {
   padding: 0;
@@ -60,6 +66,40 @@ a {
     flex: 1 0 auto;
     border-right: 2px solid #444;
     border-left:  2px solid #444;
+
+    color: #333;
+
+    .content {
+      width: 95%;
+      height: 100%;
+      margin: auto;
+
+      &.demo-list {
+        ul {
+          margin-left: 3em;
+        }
+        a {
+          color: #333;
+          font-size: 1.2em;
+          padding: 0.2em;
+
+          &:hover {
+            box-shadow: 3px 3px 4px #777;
+            background-color: #eee;
+          }
+        }
+      }
+    }
+  }
+}
+
+.demo {
+
+  &.bouncing-ball {
+    margin: auto;
+    background-color: #eee;
+    cavnas {
+    }
   }
 }
 
@@ -84,6 +124,12 @@ header, footer {
         text-align: center;
         padding: 0.6em 1em;
         font-size: 1.5em;
+        border: 2px solid #444;
+
+        &:hover {
+          color: #111;
+          background-color: #ddd;
+        }
       }
     }
   }
