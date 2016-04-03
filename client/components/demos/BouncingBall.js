@@ -3,24 +3,44 @@ import ReactDOM                         from 'react-dom';
 
 class BouncingBall extends Component {
 
-  static propTypes = {}
-
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    radius:         PropTypes.number,
+    g:              PropTypes.number,
+    color:          PropTypes.string,
+    x:              PropTypes.number,
+    y:              PropTypes.number,
+    vx:             PropTypes.number,
+    vy:             PropTypes.number,
+    canvasWidth:    PropTypes.number,
+    canvasHeight:   PropTypes.number
   }
 
   static defaultProps = {
-    radius:   20,
-    color:    '#0000ff',
-    g:        0.1 // acceleration due to gravity
+    radius:         20,
+    color:          '#0000ff',
+    g:              0.1,  // acceleration due to gravity,
+    x:              50,   // initial horizontal position
+    y:              50,   // initial vertical position
+    vx:             2,    // initial horizontal speed
+    vy:             0,    // initial vertical speed,
+    canvasWidth:    1000,
+    canvasHeight:   400
   }
 
   state = {
-    canvas:   null,
-    x:        50,  // initial horizontal position
-    y:        50,  // initial vertical position
-    vx:       2,  // initial horizontal speed
-    vy:       0  // initial vertical speed
+    intervalId:       null,
+    resizeTimeoutId:  null,
+    canvas:           null,
+    x:                this.props.x,
+    y:                this.props.y,
+    vx:               this.props.vx,
+    vy:               this.props.vy,
+    canvasWidth:      this.props.canvasWidth,
+    canvasHeight:     this.props.canvasHeight
+  }
+
+  constructor(props) {
+    super(props);
   }
 
   onEachStep() {
@@ -59,17 +79,45 @@ class BouncingBall extends Component {
     context.fill();
   }
 
+  setCanvasSize() {
+    let container     = ReactDOM.findDOMNode(this);
+    let canvasWidth   = container.clientWidth;
+    let canvasHeight  = container.clientHeight;
+    console.log(`canvasHeight ${canvasHeight}`);
+    this.setState({ canvasWidth, canvasHeight });
+  }
+
+  handleResize = () => {
+    this.setCanvasSize();
+  }
+
+  deboucedHandleResize = () => {
+    let { resizeTimeoutId } = this.state;
+    clearTimeout(resizeTimeoutId);
+    resizeTimeoutId = setTimeout(this.handleResize, 30);
+    this.setState({ resizeTimeoutId });
+  }
+
   componentDidMount() {
+    this.setCanvasSize();
     this.setState({
       canvas: ReactDOM.findDOMNode(this.refs.canvas)
     });
-    setInterval(() => {this.onEachStep()}, 1000/60); // 60 fps
+    let intervalId = setInterval(() => {this.onEachStep()}, 1000/60); // 60 fps
+    this.setState({ intervalId });
+    window.addEventListener('resize', this.deboucedHandleResize);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
+    window.removeEventListener('resize', this.deboucedHandleResize);
   }
 
   render() {
+    const { canvasWidth, canvasHeight } = this.state;
     return (
-      <section className='demo bouncing-ball'>
-        <canvas ref='canvas' width='1000' height='600'></canvas>
+      <section ref='container' className='demo bouncing-ball'>
+        <canvas ref='canvas' width={`${canvasWidth}`} height={`${canvasHeight}`}></canvas>
       </section>
     );
   }
