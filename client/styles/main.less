@@ -74,8 +74,9 @@ canvas {
     color: #333;
 
     .content {
+      display: flex;
+      flex-flow: column;
       width: 95%;
-      height: 100%;
       margin: 0 auto;
 
       &.demo-list {
@@ -91,6 +92,19 @@ canvas {
             box-shadow: 3px 3px 4px #777;
             background-color: #eee;
           }
+        }
+      }
+
+      &.size-aware-container-demo {
+        .size-aware-container {
+          flex: 1 0 auto;
+        }
+      }
+
+      &.responsive-canvas-demo {
+        .responsive-canvas {
+          flex: 1 0 auto;
+          margin-bottom: 1em;
         }
       }
     }
