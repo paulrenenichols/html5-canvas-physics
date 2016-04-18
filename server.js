@@ -1,9 +1,17 @@
 var express         = require('express');
 var path            = require('path');
 
+function noop() {};
+
 // Logging
-var serverLogger    = ('server', 'info');
-var frontendLogger  = ('frontend', 'info');
+var logger          = {
+  debug:  noop,
+  error:  noop,
+  info:   noop,
+  warn:   noop
+};
+var serverLogger    = logger;
+var frontendLogger  = logger;
 
 // Create Server
 var app = express();
