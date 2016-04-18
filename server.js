@@ -30,7 +30,7 @@ app.get('*', function(req, res) {
 // Start application
 // Optional port override with environment variable SERVER_PORT
 serverLogger.info('Server process.env.SERVER_PORT: ' + process.env.SERVER_PORT);
-var portNumber = process.env.SERVER_PORT || 8080;
+var portNumber = process.env.SERVER_PORT || 80;
 app.listen(portNumber, function(err) {
   if (err) {
       console.log(err);
